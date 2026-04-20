@@ -1,338 +1,210 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="مرسال SMS">
-    <meta name="theme-color" content="#ff8c42">
     <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>نظام إرسال SMS | اليمن</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>مرسل SMS اليمن</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: linear-gradient(135deg, #0f2b3d 0%, #1b4f6e 100%);
-            font-family: 'Tajawal', sans-serif;
-            padding: 30px 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .sms-container {
-            max-width: 680px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 48px 28px 48px 28px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-        .header {
-            background: #0a2e3f;
-            padding: 25px 30px;
-            text-align: center;
-            border-bottom: 4px solid #ffb347;
-        }
-        .header h1 {
-            color: #fff;
-            font-size: 1.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-        .header h1 i {
-            background: #ffb347;
-            padding: 10px;
-            border-radius: 50%;
-            color: #0a2e3f;
-        }
-        .badge-yemen {
-            display: inline-block;
-            background: #ffb34720;
-            padding: 4px 14px;
-            border-radius: 50px;
-            margin-top: 10px;
-            font-size: 0.75rem;
-            color: #ffdd99;
-            border: 1px solid #ffb34760;
-        }
-        .form-body { padding: 30px 28px; }
-        .input-group { margin-bottom: 25px; }
-        .input-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #1f5068;
-        }
-        .input-group label i { margin-left: 8px; color: #ff8c42; }
-        textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 24px;
-            font-family: 'Tajawal', monospace;
-            font-size: 15px;
-            resize: vertical;
-        }
-        textarea:focus {
-            outline: none;
-            border-color: #ff8c42;
-        }
-        .message-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 0.75rem;
-            color: #2c6e9e;
-        }
-        .send-btn {
-            background: linear-gradient(95deg, #ff8c42, #ffb347);
-            border: none;
-            width: 100%;
-            padding: 16px;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-        .progress-panel {
-            background: #eef5f9;
-            margin: 0 28px 28px 28px;
-            border-radius: 32px;
-            padding: 18px 20px;
-        }
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        .progress-bar-wrapper {
-            background: #cbdde6;
-            border-radius: 40px;
-            height: 12px;
-            overflow: hidden;
-            margin: 12px 0;
-        }
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #ff8c42, #ffc45e);
-            border-radius: 40px;
-            transition: width 0.3s ease;
-        }
-        .log-area {
-            background: #1e2f39;
-            color: #cfecf0;
-            border-radius: 20px;
-            padding: 12px 16px;
-            font-size: 0.75rem;
-            font-family: monospace;
-            max-height: 150px;
-            overflow-y: auto;
-            margin-top: 12px;
-        }
-        .log-entry {
-            border-bottom: 1px solid #3c5f70;
-            padding: 5px 0;
-        }
-        .btn-reset {
-            background: transparent;
-            border: 1.5px solid #ff8c42;
-            color: #ff8c42;
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 0.7rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .flex-btns { display: flex; gap: 12px; margin-top: 6px; }
-        .warning-note {
-            background: #ffefdb;
-            border-right: 5px solid #ff8c42;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            margin-top: 10px;
-            color: #a55500;
-        }
-        @media (max-width: 550px) {
-            .form-body { padding: 20px; }
-            .header h1 { font-size: 1.4rem; }
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background:#0f2b3d; padding:20px; }
+        .container { max-width:650px; margin:auto; background:#fff; border-radius:28px; padding:20px; }
+        h2 { color:#0a2e3f; border-right:5px solid #ff8c42; padding-right:15px; margin-bottom:20px; }
+        textarea, input { width:100%; padding:10px; margin:8px 0; border-radius:16px; border:1px solid #ccc; }
+        button { background:#ff8c42; border:none; padding:8px 16px; border-radius:30px; color:white; font-weight:bold; cursor:pointer; margin:4px; }
+        .main-btn { background:linear-gradient(95deg, #ff8c42, #ffb347); width:100%; padding:12px; font-size:1.1rem; margin-top:12px; }
+        .contact { background:#f1f5f9; padding:10px; border-radius:16px; margin:8px 0; display:flex; align-items:center; gap:10px; }
+        .contact input { width:20px; margin:0; }
+        .contact span { flex:1; }
+        .del { color:#e53e3e; cursor:pointer; font-weight:bold; }
+        .log { background:#1e2f39; color:#a0d2eb; border-radius:16px; padding:10px; font-size:0.75rem; max-height:150px; overflow:auto; margin-top:15px; }
+        .progress { background:#e2e8f0; border-radius:20px; height:8px; margin:10px 0; }
+        .progress-fill { width:0%; height:8px; background:#ff8c42; border-radius:20px; transition:width 0.3s; }
+        .warning { background:#fff3e0; border-right:4px solid #ff8c42; padding:10px; border-radius:12px; font-size:0.7rem; margin:10px 0; }
+        .flex { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
     </style>
 </head>
 <body>
-<div class="sms-container">
-    <div class="header">
-        <h1><i class="fas fa-envelope-open-text"></i> نظام إرسال SMS الفوري</h1>
-        <p>أرسل رسائل نصية لـ 20+ جهة اتصال بسلاسة | دعم اليمن</p>
-        <div class="badge-yemen"><i class="fas fa-map-marker-alt"></i> يعمل بدون قيود - إرسال جميع الأرقام</div>
+<div class="container">
+    <h2>📱 مرسل SMS اليمن</h2>
+
+    <div class="flex">
+        <button onclick="importContacts()">📂 استيراد من الهاتف</button>
+        <button onclick="selectAll()">✅ الكل</button>
+        <button onclick="deselectAll()">❌ إلغاء</button>
     </div>
-    <div class="form-body">
-        <div class="input-group">
-            <label><i class="fas fa-phone-alt"></i> قائمة الأرقام (كل رقم بسطر)</label>
-            <textarea id="numbers" rows="5" placeholder="967712345678&#10;967771234567"></textarea>
-            <div class="numbers-hint" style="font-size:12px; margin-top:6px;">
-                <span><i class="fas fa-check-circle"></i> يدعم: 967xxxxxx أو 966xxxxx أو +967xxxxxx</span>
-            </div>
-        </div>
-        <div class="input-group">
-            <label><i class="fas fa-comment-dots"></i> نص الرسالة</label>
-            <textarea id="message" rows="4" placeholder="اكتب محتوى الرسالة هنا ..."></textarea>
-            <div class="message-stats">
-                <span><i class="far fa-keyboard"></i> عدد الحروف: <span id="charCount">0</span></span>
-                <span><i class="fas fa-sms"></i> عدد رسائل SMS: <span id="smsCount">1</span></span>
-            </div>
-        </div>
-        <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i> بدء الإرسال الجماعي</button>
-        <div class="flex-btns">
-            <button class="btn-reset" id="resetBtn"><i class="fas fa-undo-alt"></i> إعادة تعيين</button>
-            <button class="btn-reset" id="stopBtn" style="border-color:#d9534f; color:#d9534f;"><i class="fas fa-stop"></i> إيقاف الإرسال</button>
-        </div>
-        <div class="warning-note"><i class="fas fa-info-circle"></i> سيتم فتح كل رسالة في نافذة جديدة. امنح الإذن للنوافذ المنبثقة.</div>
+
+    <div id="contactsList"></div>
+
+    <div class="flex">
+        <input type="text" id="newName" placeholder="الاسم">
+        <input type="text" id="newNumber" placeholder="الرقم (مثال: 771234567)">
+        <button onclick="addContact()">➕ أضف</button>
     </div>
-    <div class="progress-panel">
-        <div class="stats-row"><span><i class="fas fa-chart-line"></i> تقدم الإرسال</span><span id="progressStats">0 / 0</span></div>
-        <div class="progress-bar-wrapper"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="stats-row"><span><i class="fas fa-hourglass-half"></i> الحالة</span><span id="statusMsg">في انتظار البدء</span></div>
-        <div class="log-area" id="logArea"><div class="log-entry">✨ جاهز للإرسال..</div></div>
-    </div>
+
+    <textarea id="message" rows="3" placeholder="نص الرسالة"></textarea>
+    <div style="font-size:0.7rem;">عدد الحروف: <span id="charCount">0</span> | عدد الرسائل: <span id="smsCount">1</span></div>
+
+    <button id="sendBtn" class="main-btn">📤 إرسال للمحددين</button>
+    <button id="stopBtn" style="background:#d9534f;">⏹️ إيقاف</button>
+
+    <div class="progress"><div id="progressFill" class="progress-fill"></div></div>
+    <div class="log" id="logArea">✨ جاهز. أضف جهات اتصال وحدد المستلمين.</div>
+    <div class="warning">⚠️ إذا لم تفتح الرسائل، امنح إذن "النوافذ المنبثقة" لهذا الموقع (القفل 🔒 → إعدادات الموقع → النوافذ المنبثقة → السماح).</div>
 </div>
+
 <script>
-    const numbersTextarea = document.getElementById('numbers');
-    const messageTextarea = document.getElementById('message');
-    const sendBtn = document.getElementById('sendBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const progressStatsSpan = document.getElementById('progressStats');
-    const progressFillDiv = document.getElementById('progressFill');
-    const statusMsgSpan = document.getElementById('statusMsg');
-    const logArea = document.getElementById('logArea');
-    const charCountSpan = document.getElementById('charCount');
-    const smsCountSpan = document.getElementById('smsCount');
-    let currentIndex = 0, numbersArray = [], totalValidNumbers = 0, isSending = false, timeoutId = null;
-    function updateMessageStats() {
-        const length = messageTextarea.value.length;
-        charCountSpan.innerText = length;
-        smsCountSpan.innerText = Math.ceil(length / 160) || 1;
-    }
-    function addLog(message, isError = false) {
-        const logDiv = document.createElement('div');
-        logDiv.className = 'log-entry';
-        const timestamp = new Date().toLocaleTimeString('ar-EG');
-        logDiv.innerHTML = `<span style="color:#aaccdd;">[${timestamp}]</span> ${isError ? '⚠️ ' : '✅ '} ${message}`;
-        if (isError) logDiv.style.color = "#ffb3a3";
-        logArea.appendChild(logDiv);
-        logDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        while (logArea.children.length > 85) logArea.removeChild(logArea.firstChild);
-    }
-    function cleanPhoneNumber(raw) {
+    let contacts = [];
+    let selectedIds = [];
+    let isSending = false, sendQueue = [], currentIndex = 0, sendTimeout = null;
+
+    function cleanNumber(raw) {
         let cleaned = raw.replace(/[^\d+]/g, '');
         if (cleaned.startsWith('00')) cleaned = '+' + cleaned.slice(2);
-        return (cleaned && cleaned.length >= 7) ? cleaned : null;
-    }
-    function parseNumbers(rawText) {
-        let valid = [];
-        for (let line of rawText.split(/\r?\n/)) {
-            let num = line.trim();
-            if (!num) continue;
-            let cleaned = cleanPhoneNumber(num);
-            if (cleaned) valid.push(cleaned);
-            else addLog(`⚠️ تخطي رقم غير صالح: ${num}`, true);
+        if (cleaned.startsWith('+')) {
+            if (cleaned.startsWith('+967')) return cleaned;
+            cleaned = cleaned.substring(1);
         }
-        return valid;
+        if (cleaned.startsWith('0')) cleaned = cleaned.substring(1);
+        if (cleaned.startsWith('967')) return cleaned;
+        return '967' + cleaned;
     }
-    function updateProgressUI() {
-        if (totalValidNumbers === 0) { progressStatsSpan.innerText = `0 / 0`; progressFillDiv.style.width = `0%`; return; }
-        progressStatsSpan.innerText = `${currentIndex} / ${totalValidNumbers}`;
-        progressFillDiv.style.width = `${(currentIndex / totalValidNumbers) * 100}%`;
-        if (currentIndex >= totalValidNumbers && totalValidNumbers > 0 && isSending) {
-            statusMsgSpan.innerHTML = '<i class="fas fa-check-circle"></i> ✅ اكتمل الإرسال';
-            addLog(`🎉 تم إرسال جميع الرسائل (${totalValidNumbers}) بنجاح!`);
-            isSending = false;
-            if (timeoutId) clearTimeout(timeoutId);
-        } else if (isSending) statusMsgSpan.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> جاري الإرسال ... ${currentIndex}/${totalValidNumbers}`;
+
+    function save() { localStorage.setItem('contacts', JSON.stringify(contacts)); localStorage.setItem('selected', JSON.stringify(selectedIds)); }
+    function load() {
+        let c = localStorage.getItem('contacts'); if (c) contacts = JSON.parse(c);
+        let s = localStorage.getItem('selected'); if (s) selectedIds = JSON.parse(s);
+        render();
     }
-    function launchSmsForNumber(phoneNumber, messageBody) {
-        const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(messageBody)}`;
-        const newWindow = window.open(smsUrl, '_blank');
-        if (!newWindow || newWindow.closed) { addLog(`⚠️ فشل فتح نافذة للرقم ${phoneNumber}. ا允许 النوافذ المنبثقة.`, true); return false; }
-        setTimeout(() => { if (newWindow && !newWindow.closed) newWindow.close(); }, 800);
+
+    function render() {
+        let div = document.getElementById('contactsList');
+        if (!contacts.length) { div.innerHTML = '<div style="padding:12px;text-align:center;">📭 لا توجد جهات</div>'; return; }
+        div.innerHTML = '';
+        contacts.forEach(c => {
+            let checked = selectedIds.includes(c.id);
+            div.innerHTML += `<div class="contact">
+                <input type="checkbox" data-id="${c.id}" ${checked ? 'checked' : ''}>
+                <span><strong>${escapeHtml(c.name)}</strong> - ${c.number}</span>
+                <span class="del" data-id="${c.id}">🗑️</span>
+            </div>`;
+        });
+        document.querySelectorAll('.contact input').forEach(cb => cb.addEventListener('change', (e) => {
+            let id = parseInt(cb.dataset.id);
+            if (cb.checked) { if (!selectedIds.includes(id)) selectedIds.push(id); }
+            else { selectedIds = selectedIds.filter(i => i !== id); }
+            save(); updateCount();
+        }));
+        document.querySelectorAll('.del').forEach(del => del.addEventListener('click', (e) => {
+            let id = parseInt(del.dataset.id);
+            contacts = contacts.filter(c => c.id !== id);
+            selectedIds = selectedIds.filter(i => i !== id);
+            save(); render(); addLog('🗑️ تم حذف جهة');
+        }));
+        updateCount();
+    }
+    function updateCount() { document.getElementById('logArea').innerHTML = `✅ تم تحديد ${selectedIds.length} مستلم`; }
+    function escapeHtml(s) { return s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+
+    function addContact() {
+        let name = document.getElementById('newName').value.trim();
+        let num = cleanNumber(document.getElementById('newNumber').value.trim());
+        if (!name || !num) return;
+        if (contacts.some(c => c.number === num)) { alert('الرقم موجود'); return; }
+        contacts.push({ id: Date.now(), name, number: num });
+        save(); render(); addLog(`➕ تم إضافة ${name} - ${num}`);
+        document.getElementById('newName').value = ''; document.getElementById('newNumber').value = '';
+    }
+
+    async function importContacts() {
+        if ('contacts' in navigator) {
+            try {
+                let list = await navigator.contacts.select(['name','tel'], { multiple: true });
+                let added = 0;
+                for (let c of list) {
+                    let name = c.name?.[0] || 'جهة';
+                    let tel = c.tel?.[0];
+                    if (tel) {
+                        let num = cleanNumber(tel);
+                        if (!contacts.some(ex => ex.number === num)) {
+                            contacts.push({ id: Date.now() + added, name, number: num });
+                            added++;
+                        }
+                    }
+                }
+                if (added) { save(); render(); addLog(`📂 تم استيراد ${added} جهة`); }
+                else addLog('⚠️ لا توجد أرقام جديدة', true);
+            } catch(e) { addLog('❌ فشل الاستيراد', true); }
+        } else { alert('غير مدعوم على هذا المتصفح'); }
+    }
+
+    function selectAll() { selectedIds = contacts.map(c => c.id); render(); save(); addLog('✅ تم تحديد الكل'); }
+    function deselectAll() { selectedIds = []; render(); save(); addLog('◻️ تم إلغاء الكل'); }
+
+    function addLog(msg, isErr = false) {
+        let log = document.getElementById('logArea');
+        let time = new Date().toLocaleTimeString('ar-EG');
+        log.innerHTML += `<div>${isErr ? '⚠️' : '✅'} [${time}] ${msg}</div>`;
+        log.scrollTop = log.scrollHeight;
+    }
+
+    function openSms(number, text) {
+        let url = `sms:${number}?body=${encodeURIComponent(text)}`;
+        let win = window.open(url, '_blank');
+        if (!win || win.closed) { addLog(`❌ فشل فتح الرقم ${number}`, true); return false; }
+        setTimeout(() => { if (win && !win.closed) win.close(); }, 1500);
         return true;
     }
-    function sendNextMessage() {
+
+    function sendNext() {
         if (!isSending) return;
-        if (currentIndex >= totalValidNumbers) { updateProgressUI(); isSending = false; return; }
-        const currentNumber = numbersArray[currentIndex];
-        const messageContent = messageTextarea.value.trim();
-        if (!messageContent) { addLog(`❌ نص الرسالة فارغ!`, true); stopSending('نص فارغ'); return; }
-        if (currentNumber) {
-            if (launchSmsForNumber(currentNumber, messageContent)) addLog(`📨 تم فتح SMS للرقم: ${currentNumber}`);
-            else addLog(`⚠️ فشل الإرسال للرقم ${currentNumber}`, true);
+        if (currentIndex >= sendQueue.length) {
+            addLog(`🎉 تم فتح تطبيق الرسائل لـ ${sendQueue.length} جهة`);
+            isSending = false;
+            document.getElementById('progressFill').style.width = '100%';
+            return;
         }
+        let item = sendQueue[currentIndex];
+        let msg = document.getElementById('message').value.trim();
+        if (!msg) { addLog('❌ نص فارغ', true); stopSending(); return; }
+        addLog(`📨 فتح: ${item.name} (${item.number})`);
+        openSms(item.number, msg);
         currentIndex++;
-        updateProgressUI();
-        if (isSending) scheduleNext();
+        let percent = (currentIndex / sendQueue.length) * 100;
+        document.getElementById('progressFill').style.width = `${percent}%`;
+        if (isSending) sendTimeout = setTimeout(() => sendNext(), 2200);
     }
-    function scheduleNext() {
-        if (!isSending || currentIndex >= totalValidNumbers) return;
-        if (timeoutId) clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => { if (isSending) sendNextMessage(); }, 1500);
-    }
+
     function startSending() {
-        if (isSending) { addLog("⚠️ إرسال قيد التشغيل", true); return; }
-        const msg = messageTextarea.value.trim();
-        if (!msg) { addLog("❌ اكتب نص الرسالة أولاً", true); return; }
-        let parsed = parseNumbers(numbersTextarea.value);
-        if (parsed.length === 0) { addLog("❌ لا توجد أرقام صالحة", true); return; }
-        numbersArray = parsed;
-        totalValidNumbers = numbersArray.length;
+        if (isSending) { addLog('⚠️ الإرسال قيد التشغيل', true); return; }
+        let msg = document.getElementById('message').value.trim();
+        if (!msg) { addLog('❌ اكتب الرسالة أولاً', true); return; }
+        let selected = contacts.filter(c => selectedIds.includes(c.id));
+        if (!selected.length) { addLog('❌ لم يتم تحديد مستلمين', true); return; }
+        sendQueue = selected.map(c => ({ number: c.number, name: c.name }));
         currentIndex = 0;
         isSending = true;
-        addLog(`🚀 بدء إرسال ${totalValidNumbers} رسالة`);
-        updateProgressUI();
-        sendNextMessage();
+        document.getElementById('progressFill').style.width = '0%';
+        addLog(`🚀 بدء إرسال إلى ${sendQueue.length} مستلم`);
+        sendNext();
     }
-    function stopSending(reason = 'تم الإيقاف') {
-        if (isSending) {
-            if (timeoutId) clearTimeout(timeoutId);
-            isSending = false;
-            statusMsgSpan.innerHTML = `<i class="fas fa-stop-circle"></i> ${reason}`;
-            addLog(`⏸️ توقف: ${reason} (أرسل ${currentIndex} من ${totalValidNumbers})`, true);
-        }
+
+    function stopSending() {
+        if (sendTimeout) clearTimeout(sendTimeout);
+        isSending = false;
+        addLog('⏸️ تم الإيقاف', true);
     }
-    function fullReset() {
-        if (isSending) stopSending('إعادة تعيين');
-        numbersTextarea.value = "967712345678\n967770123456\n967733554422";
-        messageTextarea.value = "مرحباً! هذه رسالة تجريبية من نظام SMS.";
-        updateMessageStats();
-        currentIndex = 0; numbersArray = []; totalValidNumbers = 0; isSending = false;
-        if (timeoutId) clearTimeout(timeoutId);
-        progressStatsSpan.innerText = "0 / 0";
-        progressFillDiv.style.width = "0%";
-        statusMsgSpan.innerHTML = "<i class='fas fa-sync-alt'></i> تم إعادة التعيين";
-        logArea.innerHTML = '';
-        addLog("✨ تم إعادة التعيين. تأكد من السماح بالنوافذ المنبثقة.");
-    }
-    messageTextarea.addEventListener('input', updateMessageStats);
-    sendBtn.addEventListener('click', startSending);
-    stopBtn.addEventListener('click', () => stopSending());
-    resetBtn.addEventListener('click', fullReset);
-    window.addEventListener('DOMContentLoaded', () => { fullReset(); addLog("💡 يفتح كل رسالة في نافذة منفصلة لجميع الأرقام"); });
+
+    document.getElementById('sendBtn').onclick = startSending;
+    document.getElementById('stopBtn').onclick = stopSending;
+    document.getElementById('message').addEventListener('input', () => {
+        let len = document.getElementById('message').value.length;
+        document.getElementById('charCount').innerText = len;
+        document.getElementById('smsCount').innerText = Math.ceil(len/160) || 1;
+    });
+
+    load();
+    addLog('💡 جاهز. أضف جهات وحدد المستلمين.');
 </script>
 </body>
 </html>
